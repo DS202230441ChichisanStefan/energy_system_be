@@ -8,11 +8,13 @@ services:
       - "5432:5432"
     container_name: 'psql-dev'
 
-#  rabbitmq-standalone:
+#  rabbitmq:
 #    image: 'rabbitmq:3.11-management'
 #    restart: always
 #    environment:
-#      - RABBITMQ_DEFAULT_HOST=localhost
+#      - RABBITMQ_DEFAULT_HOST=rabbitmq
+#      - RABBITMQ_DEFAULT_USER=guest
+#      - RABBITMQ_DEFAULT_PASS=guest
 #    ports:
 #      - "5672:5672"
 #      - "15672:15672"
@@ -26,11 +28,11 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://psql-standalone:5432/energydb
       SPRING_DATASOURCE_USERNAME: "postgres"
       SPRING_DATASOURCE_PASSWORD: "Jacknife69hd!"
-#      SPRING_RABBITMQ_HOST: localhost
+      SPRING_RABBITMQ_HOST: rabbitmq
     build:
       context: "./"
       dockerfile: "Dockerfile"
     depends_on:
-#      - rabbitmq-standalone
+#      - rabbitmq
       - psql-standalone
 

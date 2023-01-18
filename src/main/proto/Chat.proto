@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.platform.energy";
+
+package com.platform.energy;
+
+// Chat service, which communicates via HTTP2
+service Chat {
+  // Server streaming call
+  rpc Subscribe (SubscriptionRequest) returns (stream Message);
+
+  // Unary calls
+  rpc SendMessage (MessageRequest) returns (Message);
+
+  rpc Unsubscribe (UnsubscriptionRequest) returns (Message);
+}
+
+message Message {
+  string message = 1;
+  string username = 2;
+  int64 timestamp = 3;
+}
+
+message MessageRequest {
+  string message = 1;
+  string username = 2;
+}
+
+message SubscriptionRequest {
+  string username = 1;
+}
+
+message UnsubscriptionRequest {
+  string username = 1;
+}
+
+
+
+
+
